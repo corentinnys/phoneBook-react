@@ -10,8 +10,15 @@ const App = () => {
   function handleClick(e)
   {
     e.preventDefault()
-   
+   if (persons.includes(newName)== false)
+   {
     setPersons([...persons,newName]);
+  
+   }else{
+    alert(newName+" is already added a phoneBook")
+   }
+     
+   
   }
   
   function handleChange(e)
