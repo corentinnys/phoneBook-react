@@ -1,35 +1,48 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 
 const App = () => {
-  const [persons, setPersons] = useState(
-     ['']
-  ) 
+  const [persons, setPersons] = useState([{'name':'','phone':''}]) 
   const [newName, setNewName] = useState('')
+  const [newphone, setNewPhone] = useState('')
 
 
   function handleClick(e)
   {
     e.preventDefault()
-   if (persons.includes(newName)== false)
-   {
-    setPersons([...persons,newName]);
+    //setPersons([...persons,{'name':newName,'phone':newphone}])
+    
+
+  let alreadyExistingName = persons.find(person => person.name === newName);
+
+if (!alreadyExistingName) {
+  setPersons([...persons,{'name':newName,'phone':newphone}])
+}else{
+  alert(newName+' is already added to phonebook ')
+}
+        
+    }
+
+
+ 
   
-   }else{
-    alert(newName+" is already added a phoneBook")
-   }
-     
-   
-  }
-  
+
   function handleChange(e)
   {
     setNewName(e.currentTarget.value)
   }
 
+
+  function handleChangeNumber(e)
+  {
+    setNewPhone (e.currentTarget.value)
+  }
   return (
     <div>
       <h2>Phonebook</h2>
       <form>
+      <div>
+          Number: <input onChange={handleChangeNumber}/>
+        </div>
         <div>
           name: <input onChange={handleChange}/>
         </div>
@@ -38,8 +51,11 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      {persons.map((person,index)=>
-        <li key={index}>{person}</li> )}
+      <div>
+      {persons.map((element, index) => (
+        <li key={index}  >{element.name} {element.phone}</li>
+      ))}
+    </div>
     </div>
   )
 }
