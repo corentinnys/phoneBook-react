@@ -31,7 +31,8 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      {persons.map(person=>person)}
+      {persons.map((person,index)=>
+        <li key={index}>{person}</li> )}
     </div>
   )
 }
