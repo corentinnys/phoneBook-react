@@ -22,16 +22,21 @@ if (!alreadyExistingName) {
         
     }
 
-
- 
-  
-
   function handleChange(e)
   {
     setNewName(e.currentTarget.value)
   }
+function handleChangeSearch(e)
+{
+  let value = e.currentTarget.value.toLowerCase()
+  let personnes = persons.filter(person =>  person.name.includes(value))
+  setPersons(personnes);
 
-
+  
+  //setPersons(...persons,{'name':personnes[0].name,'phone':personnes[0].phone})
+ //console.log(personnes)
+ 
+}
   function handleChangeNumber(e)
   {
     setNewPhone (e.currentTarget.value)
@@ -39,6 +44,7 @@ if (!alreadyExistingName) {
   return (
     <div>
       <h2>Phonebook</h2>
+      <input onChange={handleChangeSearch} type="search" />
       <form>
       <div>
           Number: <input onChange={handleChangeNumber}/>
